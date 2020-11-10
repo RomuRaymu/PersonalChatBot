@@ -6,5 +6,5 @@ using namespace std;
 
 int main() {
     chat_body();
-    cout << "FIRST TEST!" <<endl;
+    cout << "한글 테스트 (EUC-KR)" <<endl;
 }
