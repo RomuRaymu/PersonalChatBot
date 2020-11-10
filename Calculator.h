@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #define _USE_MATH_DEFINES
+#include <cstring>
 #include <math.h>
 #include <stack>
 #include <string>
@@ -36,27 +37,29 @@ using namespace std;
 #define OPERAND_PI2 'i'
 #define OPERAND_E 'e'
 
-
 class Calculator {
 private:
-	static bool CalculateStack(stack<double> &calStack, stack<char> &operStack, char operators);
-	static bool Cal(stack<double> &calStack, stack<char> &operStack);
-	static double Operate(char operators, double operand1, double operand2);
+    static bool CalculateStack(stack<double> &calStack, stack<char> &operStack,
+                               char operators);
+    static bool Cal(stack<double> &calStack, stack<char> &operStack);
+    static double Operate(char operators, double operand1, double operand2);
 
-	static bool IsDigit(char c);
-	static bool IsParenthesisLeft(char c);
-	static bool IsParenthesisRight(char c);
-	static int IsOperatorPrecedencHigher(char c);
+    static bool IsDigit(char c);
+    static bool IsParenthesisLeft(char c);
+    static bool IsParenthesisRight(char c);
+    static int IsOperatorPrecedencHigher(char c);
 
-	static char GetMatchParenthesis(char c);
-	static double GetNumber(string formula, int &index);
+    static char GetMatchParenthesis(char c);
+    static double GetNumber(string formula, int &index);
 
-	static bool CalculateFactorial(stack<double> &calStack);
-	static bool CalculateLog(string formula, int &index, double& result);
-	static bool CalculateRoot(string formula, int &index, double& result);
-	static bool CalculateTrigonometric(string formula, int &index, double& result);
-	static bool CalculateParenthesisFormula(string formula, int &index, double& result);
+    static bool CalculateFactorial(stack<double> &calStack);
+    static bool CalculateLog(string formula, int &index, double &result);
+    static bool CalculateRoot(string formula, int &index, double &result);
+    static bool CalculateTrigonometric(string formula, int &index,
+                                       double &result);
+    static bool CalculateParenthesisFormula(string formula, int &index,
+                                            double &result);
 
 public:
-	static int CalculateFormula(string formula, double &result);
+    static int CalculateFormula(string formula, double &result);
 };
