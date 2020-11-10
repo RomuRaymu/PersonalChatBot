@@ -192,7 +192,7 @@ bool Calculator::CalculateLog(string formula, int &index, double& result) {
 }
 
 bool Calculator::CalculateRoot(string formula, int &index, double& result) {
-	if (index + 4 < formula.size() && _stricmp(formula.substr(index, 4).c_str(), "root") == 0) { // root
+	if (index + 4 < formula.size() && strcasecmp(formula.substr(index, 4).c_str(), "root") == 0) { // root
 		index += 4;
 		double val = 0;
 		if (CalculateParenthesisFormula(formula, index, val)) {
@@ -247,7 +247,7 @@ bool Calculator::CalculateTrigonometric(string formula, int &index, double& resu
 
 	switch (tolower(formula[index])) {
 	case OPERATOR_SINSTART:
-		if (_stricmp(formula.substr(index, 3).c_str(), "sin") == 0) {
+		if (strcasecmp(formula.substr(index, 3).c_str(), "sin") == 0) {
 			index += 3;
 			double val = 0;
 			if (CalculateParenthesisFormula(formula, index, val)) {
@@ -260,7 +260,7 @@ bool Calculator::CalculateTrigonometric(string formula, int &index, double& resu
 		}
 		break;
 	case OPERATOR_COSSTART:
-		if (_stricmp(formula.substr(index, 3).c_str(), "cos") == 0) {
+		if (strcasecmp(formula.substr(index, 3).c_str(), "cos") == 0) {
 			index += 3;
 			double val = 0;
 			if (CalculateParenthesisFormula(formula, index, val)) {
@@ -273,7 +273,7 @@ bool Calculator::CalculateTrigonometric(string formula, int &index, double& resu
 		}
 		break;
 	case OPERATOR_TANSTART:
-		if (_stricmp(formula.substr(index, 3).c_str(), "tan") == 0) {
+		if (strcasecmp(formula.substr(index, 3).c_str(), "tan") == 0) {
 			index += 3;
 			double val = 0;
 			if (CalculateParenthesisFormula(formula, index, val)) {
