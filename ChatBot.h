@@ -7,6 +7,8 @@
 #define DIR_FOREHEAD "./texts/"
 #define TXT ".txt"
 
+#define WORD_GROUP "./texts/words.txt"
+
 class ChatBot {
     private:
         static void answer_phase(std::string dir);

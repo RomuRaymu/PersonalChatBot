@@ -26,7 +26,7 @@ void ChatBot::answer_phase(string dir) {
 
 void ChatBot::chat_check(string question) {
     ifstream readFile;
-    readFile.open("./texts/words.txt");
+    readFile.open(WORD_GROUP);
 
     if(readFile.is_open()) {
         while(!readFile.eof()) {
