@@ -1,10 +1,8 @@
-#include "chat_bot.h"
-#include <iostream>
-
+#include "ChatBot.h"
 
 using namespace std;
 
 int main() {
-    chat_body();
+    ChatBot::chat_body();
     cout << "한글 테스트 (EUC-KR)" <<endl;
 }
