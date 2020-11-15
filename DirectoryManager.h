@@ -7,14 +7,15 @@
 
 using namespace std;
 
-#define CHATBOT_PATH "ChatBot/"
-#define CHATBOT_MODE 0755
-
 class DirManager {
+  public:
+    static const char *CHATBOT_PATH;
+    static const int CHATBOT_MODE = 0755;
+
   public:
     static string GetUserDirectory();
     static string CheckUserDirectory();
     static int CreateFile(char *fileName, mode_t mode);
-    static int OpenFile(char *fileName, int flag);
+    static int OpenFile(char *fileName, int flag, mode_t mode = 0);
     static void DeleteFile(char *fileName);
 };

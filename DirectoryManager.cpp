@@ -1,5 +1,7 @@
 #include "DirectoryManager.h"
 
+const char *DirManager::CHATBOT_PATH = "ChatBot/";
+
 string DirManager::GetUserDirectory() {
     struct passwd *userInfo;
     string userDir;
@@ -27,11 +29,14 @@ int DirManager::CreateFile(char *fileName, mode_t mode) {
     return creat(userDir.c_str(), mode);
 }
 
-int DirManager::OpenFile(char *fileName, int flag) {
+int DirManager::OpenFile(char *fileName, int flag, mode_t mode) {
     string userDir = CheckUserDirectory();
     userDir.append(fileName);
 
-    return open(userDir.c_str(), flag);
+    if (flag & O_CREAT)
+        return open(userDir.c_str(), flag, mode);
+    else
+        return open(userDir.c_str(), flag);
 }
 
 void DirManager::DeleteFile(char *fileName) {
