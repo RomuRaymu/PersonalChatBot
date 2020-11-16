@@ -2,6 +2,20 @@
 
 using namespace std;
 
+void ChatBot::cal_start() {
+    string formula;
+    double result;
+
+    cout << "Write your formula.\n" << ">>";
+    getline(cin, formula);
+    Calculator::CalculateFormula(formula, result);
+
+    cout << "Answer is " << result << endl;
+}
+
+/*
+    open text file and select random line in answer text file 
+    */
 void ChatBot::answer_phase(string dir) {
     ifstream readFile;
     readFile.open(dir);
@@ -24,9 +38,22 @@ void ChatBot::answer_phase(string dir) {
     }
 }
 
-void ChatBot::chat_check(string question) {
+/*
+	* -1 : Cannot scan correct word
+	*  0 : Success to Scan for chat
+	*  1 : move to Calculate
+	*/
+int ChatBot::chat_check(string question) {
     ifstream readFile;
     readFile.open(WORD_GROUP);
+
+    if(question.find(QUIT) != string::npos) { 
+        cout << "Shutting down Program." << endl;
+        _exit(0);
+    } else if(question.find("cal") != string::npos) {
+        cal_start();
+        return 1;
+    }
 
     if(readFile.is_open()) {
         while(!readFile.eof()) {
@@ -42,21 +69,24 @@ void ChatBot::chat_check(string question) {
                     dir.append(rep_word);
                     dir.append(TXT);
                     answer_phase(dir);
-                    break;
+                    return 0;
                 }
             } while(ss >> word);
 
         }
         readFile.close();
     }
+    return -1;
 }
 
 void ChatBot::chat_body() {
-    cout << "어서오세요. 회원님." << endl;
+    cout << "Welcome." << endl;
     while(1) {
         string question;
         cout << ">> ";
-        cin >> question;
-        chat_check(question);
+        getline(cin, question);
+        if(chat_check(question) == -1) {
+            cout << "Cannot understand" << endl;
+        }
     }
 }
