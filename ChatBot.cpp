@@ -2,6 +2,9 @@
 
 using namespace std;
 
+/*
+    activate when scan "cal" and request formula
+    */
 void ChatBot::cal_start() {
     string formula;
     double result;
@@ -19,12 +22,12 @@ void ChatBot::cal_start() {
 		cout << "Answer is " << result << endl;
 		break;
 	}
-
-    cout << "Answer is " << result << endl;
 }
 
 /*
-    open text file and select random line in answer text file 
+    open text file and select random line in answer text file
+    (now this only print frist line or 'two' lines <- doesnt mean 'second' line)
+    (need to change)
     */
 void ChatBot::answer_phase(string dir) {
     ifstream readFile;
@@ -82,13 +85,15 @@ int ChatBot::chat_check(string question) {
                     return 0;
                 }
             } while(ss >> word);
-
         }
         readFile.close();
     }
     return -1;
 }
 
+/*
+    start Chat Bot
+    */
 void ChatBot::chat_body() {
     cout << "Welcome." << endl;
     while(1) {
