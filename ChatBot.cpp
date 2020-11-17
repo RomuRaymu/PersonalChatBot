@@ -8,7 +8,17 @@ void ChatBot::cal_start() {
 
     cout << "Write your formula.\n" << ">>";
     getline(cin, formula);
-    Calculator::CalculateFormula(formula, result);
+    switch (Calculator::CalculateFormula(formula, result)) {
+	case -1:
+		cout << "Err" << endl;
+		break;
+	case 0:
+		cout << "Formula Err" << endl;
+		break;
+	case 1:
+		cout << "Answer is " << result << endl;
+		break;
+	}
 
     cout << "Answer is " << result << endl;
 }
