@@ -1,3 +1,6 @@
+#ifndef __DIRECTORYMANAGER_H__
+#define __DIRECTORYMANAGER_H__
+
 #include <pwd.h>
 #include <string>
 #include <sys/fcntl.h>
@@ -19,3 +22,5 @@ class DirManager {
     static int OpenFile(char *fileName, int flag, mode_t mode = 0);
     static void DeleteFile(char *fileName);
 };
+
+#endif
