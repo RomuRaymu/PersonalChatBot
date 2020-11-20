@@ -1,26 +1,31 @@
 #include "Calculator.h"
 
 
-// °è»ê
-double Calculator::Operate(char operators, double operand1, double operand2) {
+// ê³„ì‚°
+bool Calculator::Operate(char operators, double operand1, double operand2, double &result) {
 	switch (operators) {
 	case OPERATOR_PLUS:
-		return operand1 + operand2;
+		result = operand1 + operand2;
+		return true;
 	case OPERATOR_MINUS:
-		return operand1 - operand2;
+		result = operand1 - operand2;
+		return true;
 	case OPERATOR_MULTIPLY:
-		return operand1 * operand2;
+		result = operand1 * operand2;
+		return true;
 	case OPERATOR_DIVISION:
-		return operand1 / operand2;
+		result = operand1 / operand2;
+		return true;
 	case OPERATOR_SQUARE:
-		return pow(operand1, operand2);
+		result = pow(operand1, operand2);
+		return true;
 	}
 
-	return 0;
+	return false;
 }
 
 
-// ¿À¸¥ÂÊ °ıÈ£¿Í ¿¬»êÀÚ¸¦ °è»ê
+// ì˜¤ë¥¸ìª½ ê´„í˜¸ì™€ ì—°ì‚°ìë¥¼ ê³„ì‚°
 bool Calculator::CalculateStack(stack<double> &calStack, stack<char> &operStack, char operators) {
 	switch (operators) {
 	case PARENTHESIS_1_RIGHT:
@@ -92,9 +97,9 @@ bool Calculator::CalculateFactorial(stack<double> &calStack) {
 	return true;
 }
 
-// Operand StackÀÇ Operand 2°³¿Í, Operator StackÀÇ Operator 1°³¸¦ °è»ê
+// Operand Stackì˜ Operand 2ê°œì™€, Operator Stackì˜ Operator 1ê°œë¥¼ ê³„ì‚°
 bool Calculator::Cal(stack<double> &calStack, stack<char> &operStack) {
-	double val1, val2;
+	double val1, val2, result;
 	if (calStack.size() < 2 || operStack.empty())
 		return false;
 
@@ -102,13 +107,16 @@ bool Calculator::Cal(stack<double> &calStack, stack<char> &operStack) {
 	calStack.pop();
 	val1 = calStack.top();
 	calStack.pop();
-	calStack.push(Operate(operStack.top(), val1, val2));
+	
+	if (!Operate(operStack.top(), val1, val2, result))
+	    return false;
+	calStack.push(result);
 
 	operStack.pop();
 	return true;
 }
 
-// ¿ŞÂÊ °ıÈ£ÀÎÁö È®ÀÎ
+// ì™¼ìª½ ê´„í˜¸ì¸ì§€ í™•ì¸
 bool Calculator::IsParenthesisLeft(char c) {
 	switch (c) {
 	case PARENTHESIS_1_LEFT:
@@ -119,7 +127,7 @@ bool Calculator::IsParenthesisLeft(char c) {
 	return false;
 }
 
-// ¿À¸¥ÂÊ °ıÈ£ÀÎÁö È®ÀÎ
+// ì˜¤ë¥¸ìª½ ê´„í˜¸ì¸ì§€ í™•ì¸
 bool Calculator::IsParenthesisRight(char c) {
 	switch (c) {
 	case PARENTHESIS_1_RIGHT:
@@ -139,7 +147,7 @@ int Calculator::IsOperatorPrecedencHigher(char c) {
 	return i;
 }
 
-// ÀÎÀÚ·Î ¹ŞÀº °ıÈ£¿Í ¸Â´Â Â¦À» ¹İÈ¯
+// ì¸ìë¡œ ë°›ì€ ê´„í˜¸ì™€ ë§ëŠ” ì§ì„ ë°˜í™˜
 char Calculator::GetMatchParenthesis(char c) {
 	switch (c) {
 	case PARENTHESIS_1_LEFT:
@@ -172,7 +180,7 @@ bool Calculator::CalculateLog(string formula, int &index, double& result) {
 		index += 2;
 		double val = 0;
 		if (CalculateParenthesisFormula(formula, index, val)) {
-			if (val <= 0) // Log À½¼ö
+			if (val <= 0) // Log ìŒìˆ˜
 				return false;
 			result = log(val);
 			return true;
@@ -182,7 +190,7 @@ bool Calculator::CalculateLog(string formula, int &index, double& result) {
 		index += 3;
 		double val = 0;
 		if (CalculateParenthesisFormula(formula, index, val)) {
-			if (val <= 0) // Log À½¼ö
+			if (val <= 0) // Log ìŒìˆ˜
 				return false;
 			result = log10(val);
 			return true;
@@ -196,7 +204,7 @@ bool Calculator::CalculateRoot(string formula, int &index, double& result) {
 		index += 4;
 		double val = 0;
 		if (CalculateParenthesisFormula(formula, index, val)) {
-			if (val <= 0) // root À½¼ö
+			if (val <= 0) // root ìŒìˆ˜
 				return false;
 			result = sqrt(val);
 			return true;
@@ -206,7 +214,7 @@ bool Calculator::CalculateRoot(string formula, int &index, double& result) {
 		index += 1;
 		double val = 0;
 		if (CalculateParenthesisFormula(formula, index, val)) {
-			if (val <= 0) // root À½¼ö
+			if (val <= 0) // root ìŒìˆ˜
 				return false;
 			result = sqrt(val);
 			return true;
@@ -411,12 +419,12 @@ int Calculator::CalculateFormula(string formula, double &result) {
 		}
 	}
 
-	// ³²Àº ½Ä °è»ê
+	// ë‚¨ì€ ì‹ ê³„ì‚°
 	while (!(calculateStack.size() == 1 && operatorStack.empty())) {
 		if (!Cal(calculateStack, operatorStack))
 			break;
 	}
-	//°è»êÀÌ ¿Ã¹Ù¸£°Ô µÊ
+	//ê³„ì‚°ì´ ì˜¬ë°”ë¥´ê²Œ ë¨
 	if (calculateStack.size() == 1 && operatorStack.empty()) {
 		result = calculateStack.top();
 		return 1;
