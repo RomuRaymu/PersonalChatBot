@@ -11,6 +11,7 @@
 // define for special word
 #define QUIT "exit"
 #define CALCULATOR "계산"
+#define MINE "지뢰"
 
 // define for selected file name
 #define DIR_FOREHEAD "./texts/"

@@ -92,10 +92,10 @@ int ChatBot::chat_check(string question) {
     if(question.find(QUIT) != string::npos) { 
         cout << "Shutting down Program." << endl;
         _exit(0);
-    } else if(question.find("cal") != string::npos) {
+    } else if(question.find(CALCULATOR) != string::npos) {
         cal_start();
         return 1;
-    } else if(question.find("지뢰") != string::npos) {
+    } else if(question.find(MINE) != string::npos) {
         mine_start();
         return 2;
     }
