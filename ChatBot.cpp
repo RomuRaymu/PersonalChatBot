@@ -25,8 +25,36 @@ void ChatBot::cal_start() {
 }
 
 /*
+    activate when scan "지뢰" and start MineSweeper
+    */
+int ChatBot::mine_start() {
+    class MineSweeper ms;
+
+    while (1) {
+        cout << "1. Start Mine Sweeper" << endl;
+        cout << "2. Exit" << endl;
+
+        int num = 0;
+        cout << ">> ";
+        cin >> num;
+
+        if (num == 1) {
+            cout << "Start Mine Sweeper" << endl;
+            ms.StartMineSweeper();
+            cout << "End Mine Sweeper" << endl;
+        } else if (num == 2) {
+            break;
+        }
+
+        cout << endl;
+    }
+
+    return 0;
+}
+
+/*
     open text file and select random line in answer text file
-    (now this only print frist line or 'two' lines <- doesnt mean 'second' line)
+    (now, "this fuction" only print frist line or 'two' lines <- doesnt mean 'second' line)
     (need to change)
     */
 void ChatBot::answer_phase(string dir) {
@@ -55,6 +83,7 @@ void ChatBot::answer_phase(string dir) {
 	* -1 : Cannot scan correct word
 	*  0 : Success to Scan for chat
 	*  1 : move to Calculate
+    *  2 : move to MineSweeper
 	*/
 int ChatBot::chat_check(string question) {
     ifstream readFile;
@@ -66,6 +95,9 @@ int ChatBot::chat_check(string question) {
     } else if(question.find("cal") != string::npos) {
         cal_start();
         return 1;
+    } else if(question.find("지뢰") != string::npos) {
+        mine_start();
+        return 2;
     }
 
     if(readFile.is_open()) {

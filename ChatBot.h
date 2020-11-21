@@ -6,6 +6,7 @@
 #include <cstdlib>
 
 #include "Calculator.h"
+#include "MineSweeper.h"
 
 // define for special word
 #define QUIT "exit"
