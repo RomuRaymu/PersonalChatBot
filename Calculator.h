@@ -42,7 +42,7 @@ private:
     static bool CalculateStack(stack<double> &calStack, stack<char> &operStack,
                                char operators);
     static bool Cal(stack<double> &calStack, stack<char> &operStack);
-    static double Operate(char operators, double operand1, double operand2);
+    static bool Operate(char operators, double operand1, double operand2, double &result);
 
     static bool IsDigit(char c);
     static bool IsParenthesisLeft(char c);
