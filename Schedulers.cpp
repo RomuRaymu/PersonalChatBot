@@ -32,7 +32,7 @@ SCHEDULE *GetSchedulePointerByDateAndTime ( SCHEDULE *pHead , DATE date )
 {
 	SCHEDULE *pFind = pHead->next;
 
-	while ( pFind != NULL )
+	while ( pFind != NULL ) //할 일 찾기
 	{
 		if ( CompareDateAndTime ( pFind->mDate , date ) == 0 )
 		{
@@ -56,7 +56,7 @@ void AddScheduleNode ( SCHEDULE *pHead , SCHEDULE schedule )
 	
 	while ( pFind != NULL )
 	{
-		if ( CompareDateAndTime ( schedule.mDate , pFind->mDate ) == -1 )
+		if ( CompareDateAndTime ( schedule.mDate , pFind->mDate ) == -1 ) //해당 요일 계속 찾는 과정
 		{
 			pPrev = pPrev->next;
 			pFind = pFind->next;
@@ -129,7 +129,7 @@ void PrintAllSchedule ( SCHEDULE *pHead )
 {
 	SCHEDULE *pFind = pHead->next;
 
-	while ( pFind != NULL )
+	while ( pFind != NULL ) //스케줄 체크
 	{
 		printf ( "%s\n" , pFind->mText );
 		PrintDate ( pFind->mDate );
@@ -145,7 +145,7 @@ void LoadScheduleFromFile ( SCHEDULE *pHead ,  const char* szFileName )
 	int nCnt = 0;
 	char szBuf[STRING_MAX];
 
-	fp = fopen ( szFileName , "r" );
+	fp = fopen ( szFileName , "r" ); //file 읽기
 
 	if ( fp == NULL )
 	{
@@ -159,7 +159,7 @@ void LoadScheduleFromFile ( SCHEDULE *pHead ,  const char* szFileName )
 	{		
 		fscanf ( fp , "%s" , szBuf );
 
-		switch ( nCnt )
+		switch ( nCnt ) //연 초 일 시간, 할일 까지 순서대로 입력 받음 숫자는 atoi 함수 통해 숫자로 변경
 		{
 			case 0:
 				news.mDate.m_nYear = atoi ( szBuf );
@@ -194,22 +194,16 @@ void LoadScheduleFromFile ( SCHEDULE *pHead ,  const char* szFileName )
 	fclose ( fp );
 }
 
-void SaveScheduleToFile ( SCHEDULE *pHead , const char* szFileName )
+void SaveScheduleToFile ( SCHEDULE *pHead , const char * szFileName )
 {
 	FILE *fp;
 	SCHEDULE *pFind = pHead->next;
-
-	fp = fopen ( szFileName , "w" );
+ 
+	fp = fopen ( szFileName , "w" );//파일 내용 전부 추가
 
 	while ( pFind != NULL )
 	{
-		fprintf ( fp , "%d %d %d %d %s\n" , 
-				pFind->mDate.m_nYear ,
-				pFind->mDate.m_nMonth ,
-				pFind->mDate.m_nDay ,
-				pFind->mDate.m_nHour ,
-				pFind->mText
-				);	
+		fprintf ( fp , "%d %d %d %d %s\n" ,  pFind->mDate.m_nYear , pFind->mDate.m_nMonth ,pFind->mDate.m_nDay , pFind->mDate.m_nHour , pFind->mText);	
 
 		pFind = pFind->next;
 	}
@@ -229,23 +223,18 @@ SCHEDULE InputSchedule ( SCHEDULE *pHead )
 
 	while ( TRUE )
 	{
-		printf ("     write Year, Mon, Day, Hour, active \n");
-		printf ("     (ex)2017 10 31 18 festival           \n");;
+		printf ("     년, 월, 일, 시, 할 일을 적어주세요 \n");
+		printf ("     (ex)2020 11 20 18 축제           \n");;
 		printf ("	 >> ");
 
-		scanf ( "%d %d %d %d %s" , 
-				&ret.mDate.m_nYear ,
-				&ret.mDate.m_nMonth ,
-				&ret.mDate.m_nDay ,
-				&ret.mDate.m_nHour ,
-				ret.mText );
+		scanf ( "%d %d %d %d %s" , &ret.mDate.m_nYear ,	&ret.mDate.m_nMonth , &ret.mDate.m_nDay , &ret.mDate.m_nHour , ret.mText );
 
-		if ( GetSchedulePointerByDateAndTime ( pHead , ret.mDate ) == NULL )
+		if ( GetSchedulePointerByDateAndTime ( pHead , ret.mDate ) == NULL ) // 스케줄 확인해서 없으면 추가 있으면 넣어줍니다.
 		{
 			break;
 		}
-
-		printf ("  already worke to do at the same time \n");
+		
+		printf ("  이미 그 시간에 할 일이 존재합니다 \n");
 
 	}
 	system ("clear");
@@ -257,19 +246,15 @@ void ShowAllScheduleByDay ( SCHEDULE *pHead , DATE date )
 	SCHEDULE *pFind = pHead->next;
 
 	printf ( "\n" );
-	printf ( "              *  %d/%d/%d to do? *\n" , date.m_nYear ,
-			date.m_nMonth ,
-			date.m_nDay );
+	printf ( "              *  %d/%d/%d에 할 일? *\n" , date.m_nYear ,date.m_nMonth ,date.m_nDay );
 	
 	printf ( "------------------------------------------------------------------------------\n" );
 
 	while ( pFind != NULL )
 	{
-		if ( CompareDate ( pFind->mDate , date ) == 0 )
+		if ( CompareDate ( pFind->mDate , date ) == 0 ) 
 		{
-			printf ( ">>%d Hour : %s\n" , 
-					pFind->mDate.m_nHour ,
-					pFind->mText );
+			printf ( ">>%d 시 : %s\n" , pFind->mDate.m_nHour , pFind->mText );
 		}
 
 		pFind = pFind->next;
@@ -285,17 +270,13 @@ void DeleteSchedule ( SCHEDULE *pHead )
 	current = GetToday ();
 
 	system ("clear");
-	DrawCalendar ( pHead , current );
+	DrawCalendar ( pHead , current ); //해당 달 입력 받기
 	ShowAllScheduleByDay ( pHead , current );
-		printf ("   Please write year, month, day, hour \n");
-		printf ("   |  (ex)2020 11 20 17                 ��\n");
+		printf ("   지울 스케줄 년, 월, 일, 시간을 적어주세요 \n");
+		printf ("   |  (ex)2020 11 20 17                 |\n");
 		printf ("	 >> ");
 
-	scanf ( "%d %d %d %d" ,
-			&date.m_nYear ,
-			&date.m_nMonth ,
-			&date.m_nDay ,
-			&date.m_nHour );
+	scanf ( "%d %d %d %d" ,&date.m_nYear , &date.m_nMonth , &date.m_nDay ,&date.m_nHour );
 
 	DeleteScheduleByDateAndTime ( pHead , date );
 	system ("clear");
@@ -314,158 +295,20 @@ void Changeschedule ( SCHEDULE *pHead )
 {
 	SCHEDULE ret;
 	DATE current;
-	current = GetToday ();
+	current = GetToday (); //현재 요일 받기
 
 	system ("clear");
-	DrawCalendar ( pHead , current );
+	DrawCalendar ( pHead , current ); //해당 달 보여주기
 	ShowAllScheduleByDay ( pHead , current );
 
-		printf ("   Please write year, month, day, hour \n");
+		printf ("   수정할 년, 월 ,일 , 시간을 적어주세요 \n");
 		printf ("   |  (ex)2020 11 20 17                |\n");
 		printf ("	 >> ");
 		scanf ( "%d %d %d %d" , &ret.mDate.m_nYear ,&ret.mDate.m_nMonth ,&ret.mDate.m_nDay ,&ret.mDate.m_nHour);
-		printf ("   wrtie down the revision \n           >>");
+		printf ("   수정할 일정 입력 \n           >>");
 
 	ChangeScheduleByDateAndTime ( pHead, ret );
-		system ("clear");
+	system ("clear");
 
 }
 
-int GetLastDayByMonthAndYear ( int nYear , int nMonth )
-{
-	int nLastDay;
-
-	if ( nMonth == 1 || 
-			nMonth == 3 || 
-			nMonth == 5 || 
-			nMonth == 7 ||
-			nMonth == 8 ||
-			nMonth ==10 ||
-			nMonth == 12 )
-	{
-		nLastDay = 31;
-	}
-	else if ( nMonth == 4 ||
-			nMonth == 6 ||
-			nMonth == 9 ||
-			nMonth==11 )
-	{
-		nLastDay = 30;
-	}
-
-	if ( nMonth == 2 )
-	{
-		nLastDay = 28;
-	}
-
-	if ( nMonth == 2 && ( nYear % 4 ) == 0 && ( nYear % 100 != 0 ) || ( nYear % 400 == 0 ) )
-	{
-		nLastDay=29;
-	}
-
-	return nLastDay;
-}
-
-void DrawCalendar ( SCHEDULE *pHead , DATE date )
-{
-	char szBuf[STRING_MAX];
-
-	int nYear;
-	int nMonth;
-	int nLastDay;
-	int nTh;
-	int nDay;
-	int nDate;
-	int nX;
-	int nZ;
-	int count=0;
-
-	nYear = date.m_nYear;
-	nMonth = date.m_nMonth;
-	nLastDay = GetLastDayByMonthAndYear ( nYear , nMonth );
-
-	
-	if(nMonth > 9)
-	printf("------------------- %dyear  %dmonth ---------------\n", nYear , nMonth );
-	else
-	printf("------------------- %dyear  %dmonth ---------------\n", nYear , nMonth );
-	printf ("|  %6s%6s%6s%6s%6s%6s%6s    |\n", "Sun" ,"Mon" ,"Tue" ,"Wed" ,"Thu" ,"Fri" ,"Sat" );
-
-	nDate = 1 ,nX = 0 , nZ = 0;
-
-	while ( nX <= 6 )
-	{
-		nX = nX + 1;
-		nTh = nYear / 100;          
-		nYear = nYear % 100;   
-		nDay = ( (21 * nTh / 4 ) +
-				( 5 * nYear / 4 ) + ( 26 * (nMonth + 1 ) / 10 ) + nDate - 1 ) % 7;
-		printf("|");
-        while ( nZ < 7 )
-		{
-			if ( nX == 1 && nZ < nDay )
-			{
-				printf ( "%6s" , " " );
-			}
-			else 
-			{
-				DATE temp;
-				temp = date;
-
-				temp.m_nDay = nDate;
-
-				if ( CompareDate ( date , temp ) == 0 )
-				{
-					sprintf ( szBuf , "[%d]" , nDate );
-					printf ( "%6s" , szBuf );
-				}
-				else if ( GetSchedulePointerByDate ( pHead , temp )
-					!= NULL )
-				{
-					sprintf ( szBuf , "*%d" , nDate );
-					printf ( "%6s" , szBuf );
-				}
-				else
-				{
-					count++;
-					printf ( "%6d" , nDate );
-				}
-
-				if ( nDate < nLastDay )
-				{
-					nDate = nDate + 1;
-				}
-				else if ( nDate >= nLastDay )
-				{
-					break;
-				}
-			}
-
-			nZ = nZ + 1;
-		}
-		if(nZ==0)
-		printf ( "\t\t\t\t\t\t|\n" );
-		else if(nZ==1)
-		printf ( "\t\t\t\t\t|\n" );
-		else if(nZ==2)
-		printf ( "\t\t\t\t|\n" );
-		else if(nZ==3)
-		printf ( "\t\t\t|\n" );
-		else if(nZ==4)
-		printf ( "\t\t|\n" );
-		else if(nZ==5)
-		printf ( "\t\t|\n" );
-		else
-		printf ( "\t|\n" );
-
-		if ( nDate >= nLastDay )
-		{
-			break;
-		}
-		
-		nZ = 0;
-	}
-	printf("|                                              |\n");
-	printf("----------------------------------------------\n\n");
-
-}

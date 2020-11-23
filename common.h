@@ -19,14 +19,15 @@ enum
 	TRUE
 };
 
+//data 구조체 년, 월, 일, 시간
 typedef struct _DATE{
 	int m_nYear;
 	int m_nMonth;
 	int m_nDay;
 	int m_nHour;
-	int m_nMinute;
 }DATE;
 
+//Schedule 구조체 Date와 그날 일정 계산
 typedef struct _SCHEDULE {
     DATE mDate;
     char mText[STRING_MAX];

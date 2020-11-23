@@ -3,21 +3,12 @@
 int GetLastDayByMonthAndYear ( int nYear , int nMonth )
 {
 	int nLastDay;
-
-	if ( nMonth == 1 || 
-			nMonth == 3 || 
-			nMonth == 5 || 
-			nMonth == 7 ||
-			nMonth == 8 ||
-			nMonth ==10 ||
-			nMonth == 12 )
+	//달 계산
+	if ( nMonth == 1 || nMonth == 3 || nMonth == 5 || nMonth == 7 || nMonth == 8 || nMonth ==10 || nMonth == 12 )
 	{
 		nLastDay = 31;
 	}
-	else if ( nMonth == 4 ||
-			nMonth == 6 ||
-			nMonth == 9 ||
-			nMonth==11 )
+	else if ( nMonth == 4 || nMonth == 6 || nMonth == 9 || nMonth==11 )
 	{
 		nLastDay = 30;
 	}
@@ -26,7 +17,7 @@ int GetLastDayByMonthAndYear ( int nYear , int nMonth )
 	{
 		nLastDay = 28;
 	}
-
+	//윤년 계산
 	if ( nMonth == 2 && ( nYear % 4 ) == 0 && ( nYear % 100 != 0 ) || ( nYear % 400 == 0 ) )
 	{
 		nLastDay=29;
@@ -55,9 +46,9 @@ void DrawCalendar ( SCHEDULE *pHead , DATE date )
 
 	
 	if(nMonth > 9)
-	printf("------------------- %dyear  %dmonth ---------------\n", nYear , nMonth );
+	printf("---------------  %d년 %d월  ---------------\n", nYear , nMonth );
 	else
-	printf("------------------- %dyear  %dmonth ---------------\n", nYear , nMonth );
+	printf("---------------  %d년 %d월  ---------------\n", nYear , nMonth );
 	printf ("|  %6s%6s%6s%6s%6s%6s%6s    |\n", "Sun" ,"Mon" ,"Tue" ,"Wed" ,"Thu" ,"Fri" ,"Sat" );
 
 	nDate = 1 ,nX = 0 , nZ = 0;
@@ -67,8 +58,8 @@ void DrawCalendar ( SCHEDULE *pHead , DATE date )
 		nX = nX + 1;
 		nTh = nYear / 100;          
 		nYear = nYear % 100;   
-		nDay = ( (21 * nTh / 4 ) +
-				( 5 * nYear / 4 ) + ( 26 * (nMonth + 1 ) / 10 ) + nDate - 1 ) % 7;
+		
+		nDay = ( ((21 * nTh / 4 ) + 5 * nYear / 4 ) + ( 26 * (nMonth + 1 ) / 10 ) + nDate - 1 ) % 7;//해당 월 1 위치 계산
 		printf("|");
         while ( nZ < 7 )
 		{
@@ -115,17 +106,17 @@ void DrawCalendar ( SCHEDULE *pHead , DATE date )
 		if(nZ==0)
 		printf ( "\t\t\t\t\t\t|\n" );
 		else if(nZ==1)
-		printf ( "\t\t\t\t\t|\n" );
+		printf ( "\t\t\t\t\t |\n" );
 		else if(nZ==2)
-		printf ( "\t\t\t\t|\n" );
+		printf ( "\t\t\t\t |\n" );
 		else if(nZ==3)
-		printf ( "\t\t\t|\n" );
+		printf ( "\t\t\t |\n" );
 		else if(nZ==4)
-		printf ( "\t\t|\n" );
+		printf ( "\t\t |\n" );
 		else if(nZ==5)
-		printf ( "\t\t|\n" );
+		printf ( "\t\t |\n" );
 		else
-		printf ( "\t|\n" );
+		printf ( "\t |\n" );
 
 		if ( nDate >= nLastDay )
 		{
@@ -134,7 +125,7 @@ void DrawCalendar ( SCHEDULE *pHead , DATE date )
 		
 		nZ = 0;
 	}
-	printf("|                                              |\n");
-	printf("----------------------------------------------\n\n");
+	printf("|                                                |\n");
+	printf("------------------------------------------------\n\n");
 
 }

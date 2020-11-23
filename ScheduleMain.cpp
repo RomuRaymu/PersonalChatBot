@@ -3,6 +3,7 @@
 #include "Schedulers.h"
 #include "Calendar.h"
 
+//메뉴
 enum MENU
 {
 	PREV_MONTH = 'a' ,
@@ -16,14 +17,21 @@ enum MENU
 };
 
 
-char GetSelectedMenu(void);
+char GetSelectedMenu(void); //메뉴부분 출력
 
-int main(void)
+int ScheduleMain(string name) //name에 GetUserDirectory()를 보내주세요
 {
+	name.append("/");
+	name.append(SCHEDULERFILENAME);
+	int check=name.length();
+	char * scFileName;
 	SCHEDULE *pHead;
 	DATE current;
 	pHead = InitScheduleHead ();
-	LoadScheduleFromFile ( pHead , SCHEDULERFILENAME );
+	for(int i=0;i<check;i++) {
+		scFileName[i]=name[i];
+	}
+	LoadScheduleFromFile ( pHead , scFileName );
 
 	current = GetToday ();
 	system ("clear");
@@ -42,7 +50,7 @@ int main(void)
 			break;
 		}
 
-		switch ( ch )
+		switch ( ch ) //메뉴에 따라 해당 달로이동
 		{
 			case PREV_MONTH:
 				ModifyMonth ( &current , -1 );
@@ -77,7 +85,7 @@ int main(void)
 	}
 
 
-	SaveScheduleToFile ( pHead , SCHEDULERFILENAME );
+	SaveScheduleToFile ( pHead , scFileName );
 	KillAllScheduleNode ( pHead );
 }
 
@@ -87,17 +95,17 @@ char GetSelectedMenu ( void )
 
 	printf ("          ----------------------------\n");
 	printf ("          |          MENU            |\n");
-	printf ("          |  d : next month          |\n");
-	printf ("          |  a : last month          |\n");
-	printf ("          |  s : next day            |\n");
-	printf ("          |  w : yesterday           |\n");
-	printf ("          |  1 : add schedule        |\n");
-	printf ("          |  2 : delete schedule     |\n");
-	printf ("          |  3 : change schedule     |\n");
-	printf ("          |  q : end schedule process|\n");
+	printf ("          |  d : 다음달 보기         |\n");
+	printf ("          |  a : 전 달 보기          |\n");
+	printf ("          |  s : 다음날보기          |\n");
+	printf ("          |  w : 어제 보기           |\n");
+	printf ("          |  1 : 스케줄 추가하기     |\n");
+	printf ("          |  2 : 스케줄 지우기       |\n");
+	printf ("          |  3 : 스케줄 바꾸기       |\n");
+	printf ("          |  q : 채팅 봇으로 돌아가기|\n");
 	printf ("          --------------------------\n\n");
-	printf ("           choose menu >> ");
+	printf ("           메뉴 고르시오 >> ");
 	ch = getchar ();
+	printf("\n");
 	return ch;
 }
-
