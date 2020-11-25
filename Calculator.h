@@ -47,7 +47,7 @@ private:
     static bool IsDigit(char c);
     static bool IsParenthesisLeft(char c);
     static bool IsParenthesisRight(char c);
-    static int IsOperatorPrecedencHigher(char c);
+    static int IsOperatorPrecedenceHigher(char c);
 
     static char GetMatchParenthesis(char c);
     static double GetNumber(string formula, int &index);
