@@ -305,7 +305,6 @@ bool Calculator::IsDigit(char c) {
 
 
 /*
-	* -1 : Not Formula
 	*  0 : Formula Error
 	*  1 : Correct
 	*/
