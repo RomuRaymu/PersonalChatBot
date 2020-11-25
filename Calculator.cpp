@@ -44,7 +44,7 @@ bool Calculator::CalculateStack(stack<double> &calStack, stack<char> &operStack,
 	case OPERATOR_SQUARE:
 		if (!operStack.empty()) {
 			if (!IsParenthesisLeft(operStack.top())) {
-				if (IsOperatorPrecedencHigher(operStack.top()) == 2) {
+				if (IsOperatorPrecedenceHigher(operStack.top()) == 2) {
 					if (!Cal(calStack, operStack))
 						return false;
 				}
@@ -55,7 +55,7 @@ bool Calculator::CalculateStack(stack<double> &calStack, stack<char> &operStack,
 	case OPERATOR_DIVISION:
 		if (!operStack.empty()) {
 			if (!IsParenthesisLeft(operStack.top())) {
-				if (IsOperatorPrecedencHigher(operStack.top()) >= 1) {
+				if (IsOperatorPrecedenceHigher(operStack.top()) >= 1) {
 					if (!Cal(calStack, operStack))
 						return false;
 				}
@@ -138,7 +138,7 @@ bool Calculator::IsParenthesisRight(char c) {
 	return false;
 }
 
-int Calculator::IsOperatorPrecedencHigher(char c) {
+int Calculator::IsOperatorPrecedenceHigher(char c) {
 	int i = 0;
 	if (c == OPERATOR_MULTIPLY || c == OPERATOR_DIVISION)
 		i = 1;
