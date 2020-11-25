@@ -362,7 +362,10 @@ void MineSweeper::LoadGame() {
     close(fd);
 }
 
-void MineSweeper::DeleteSave() { DirManager::DeleteFile(SAVEFILE); }
+void MineSweeper::DeleteSave() {
+    isGameLoad = false;
+    DirManager::DeleteFile(SAVEFILE);
+}
 
 // Rank
 
