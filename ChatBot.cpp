@@ -12,14 +12,11 @@ void ChatBot::cal_start() {
     cout << "Write your formula.\n" << ">>";
     getline(cin, formula);
     switch (Calculator::CalculateFormula(formula, result)) {
-	case -1:
-		cout << "Err" << endl;
-		break;
 	case 0:
-		cout << "Formula Err" << endl;
+		cout << "계산 식이 올바르지 않습니다!!" << endl;
 		break;
 	case 1:
-		cout << "Answer is " << result << endl;
+		cout << "계산한 결과 : " << result << endl;
 		break;
 	}
 }
@@ -29,25 +26,7 @@ void ChatBot::cal_start() {
     */
 int ChatBot::mine_start() {
     class MineSweeper ms;
-
-    while (1) {
-        cout << "1. Start Mine Sweeper" << endl;
-        cout << "2. Exit" << endl;
-
-        int num = 0;
-        cout << ">> ";
-        cin >> num;
-
-        if (num == 1) {
-            cout << "Start Mine Sweeper" << endl;
-            ms.StartMineSweeper();
-            cout << "End Mine Sweeper" << endl;
-        } else if (num == 2) {
-            break;
-        }
-
-        cout << endl;
-    }
+    ms.StartMineSweeper();
 
     return 0;
 }
