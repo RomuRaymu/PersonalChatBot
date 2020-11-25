@@ -1163,22 +1163,25 @@ void MineSweeper::SetTerminalSize_Rank() {
 }
 
 int MineSweeper::GetKey() {
-    int c;
-    struct termios oldattr, newattr;
+    int key;
+    struct termios lastAttr, newAttr;
 
-    tcgetattr(STDIN_FILENO, &oldattr);
-    newattr = oldattr;
-    newattr.c_lflag &= ~(ICANON | ECHO);
-    newattr.c_cc[VMIN] = 1;
-    newattr.c_cc[VTIME] = 0;
-    tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
-    c = getchar();
-    if (c == ARROW) {
+    tcgetattr(STDIN_FILENO, &lastAttr);
+    newAttr = lastAttr;
+    newAttr.c_lflag &= ~(ICANON | ECHO);
+    newAttr.c_cc[VMIN] = 1;
+    newAttr.c_cc[VTIME] = 0;
+    tcsetattr(STDIN_FILENO, TCSANOW, &newAttr);
+
+    key = getchar();
+    if (key == ARROW) {
         getchar();
-        c = getchar();
+        key = getchar();
     }
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
-    return c;
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &lastAttr);
+
+    return key;
 }
 
 void MineSweeper::Terminal_Init(bool isStart) {
