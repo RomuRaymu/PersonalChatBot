@@ -1,5 +1,12 @@
+# visual code, visual studio 관련 파일들
 .vscode
 .vs
+
+# 컴파일 후 실행 파일
+*.o
+*.out
 *.exe
+
+# 잡다한 파일들
 tmp\
 main
