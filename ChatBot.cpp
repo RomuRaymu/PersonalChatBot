@@ -3,13 +3,13 @@
 using namespace std;
 
 /*
-    activate when scan "cal" and request formula
+    activate when scan "계산" and request formula
     */
 void ChatBot::cal_start() {
     string formula;
     double result;
 
-    cout << "Write your formula.\n" << ">>";
+    cout << "식을 입력해주세요.\n" << ">>";
     getline(cin, formula);
     switch (Calculator::CalculateFormula(formula, result)) {
 	case 0:
@@ -21,6 +21,13 @@ void ChatBot::cal_start() {
 	}
 }
 
+/*
+    activate when scan "알람" and start alarm function
+    */
+void ChatBot::alarm_start() {
+    Alarm Al;
+    Al.Alarm_function();
+}
 /*
     activate when scan "지뢰" and start MineSweeper
     */
@@ -63,13 +70,14 @@ void ChatBot::answer_phase(string dir) {
 	*  0 : Success to Scan for chat
 	*  1 : move to Calculate
     *  2 : move to MineSweeper
+    *  3 : move to Alarm
 	*/
 int ChatBot::chat_check(string question) {
     ifstream readFile;
     readFile.open(WORD_GROUP);
 
     if(question.find(QUIT) != string::npos) { 
-        cout << "Shutting down Program." << endl;
+        cout << "프로그램을 종료합니다." << endl;
         _exit(0);
     } else if(question.find(CALCULATOR) != string::npos) {
         cal_start();
@@ -77,6 +85,9 @@ int ChatBot::chat_check(string question) {
     } else if(question.find(MINE) != string::npos) {
         mine_start();
         return 2;
+    } else if(question.find(ALARM) != string::npos) {
+        alarm_start();
+        return 3;
     }
 
     if(readFile.is_open()) {
@@ -106,13 +117,13 @@ int ChatBot::chat_check(string question) {
     start Chat Bot
     */
 void ChatBot::chat_body() {
-    cout << "Welcome." << endl;
+    cout << "어서오세요 회원님." << endl;
     while(1) {
         string question;
         cout << ">> ";
         getline(cin, question);
         if(chat_check(question) == -1) {
-            cout << "Cannot understand" << endl;
+            cout << "이해할 수 없는 말입니다." << endl;
         }
     }
 }
