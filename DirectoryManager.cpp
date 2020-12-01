@@ -22,14 +22,14 @@ string DirManager::CheckUserDirectory() {
     return userDir;
 }
 
-int DirManager::CreateFile(char *fileName, mode_t mode) {
+int DirManager::CreateFile(const char *fileName, mode_t mode) {
     string userDir = CheckUserDirectory();
     userDir.append(fileName);
 
     return creat(userDir.c_str(), mode);
 }
 
-int DirManager::OpenFile(char *fileName, int flag, mode_t mode) {
+int DirManager::OpenFile(const char *fileName, int flag, mode_t mode) {
     string userDir = CheckUserDirectory();
     userDir.append(fileName);
 
@@ -39,7 +39,7 @@ int DirManager::OpenFile(char *fileName, int flag, mode_t mode) {
         return open(userDir.c_str(), flag);
 }
 
-void DirManager::DeleteFile(char *fileName) {
+void DirManager::DeleteFile(const char *fileName) {
     string userDir = CheckUserDirectory();
     userDir.append(fileName);
 
