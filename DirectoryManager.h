@@ -18,9 +18,9 @@ class DirManager {
   public:
     static string GetUserDirectory();
     static string CheckUserDirectory();
-    static int CreateFile(char *fileName, mode_t mode);
-    static int OpenFile(char *fileName, int flag, mode_t mode = 0);
-    static void DeleteFile(char *fileName);
+    static int CreateFile(const char *fileName, mode_t mode);
+    static int OpenFile(const char *fileName, int flag, mode_t mode = 0);
+    static void DeleteFile(const char *fileName);
 };
 
 #endif
