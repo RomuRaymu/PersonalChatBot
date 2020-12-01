@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "Daters.h"
+#include "Calendar.h"
 
 void KillAllScheduleNode ( SCHEDULE *pHead ); //모든 스케줄 제거
 void AddScheduleNode ( SCHEDULE *pHead , SCHEDULE schedule ); //시간까지 찾아서 그것보다 더 큰거에 입력
@@ -24,5 +25,20 @@ void ShowAllScheduleByDay ( SCHEDULE *pHead , DATE date ); //date 일로 가서 
 void DeleteSchedule ( SCHEDULE *pHead ); //스케줄 삭제
 void AddSchedule ( SCHEDULE *pHead ); // 스케줄 추가
 void Changeschedule ( SCHEDULE *pHead ); //스케줄 수정
-#endif
 
+char GetSelectedMenu(void); //메뉴부분 출력
+int ScheduleMain(string name); //name에 GetUserDirectory()를 보내주세요
+//메뉴
+enum MENU
+{
+	PREV_MONTH = 'a' ,
+	NEXT_MONTH = 'd' ,
+	PREV_DAY = 'w' ,
+	NEXT_DAY = 's' ,
+	ADD_SCHEDULE = '1' ,
+	DELETE_SCHEDULE = '2' ,
+	CHANGE_SCHEDULE = '3' ,
+	QUIT = 'q'
+};
+
+#endif

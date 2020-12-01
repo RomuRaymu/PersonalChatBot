@@ -12,13 +12,13 @@
 #include "MineSweeper.h"
 
 // scheduler header
-#include "common.h"
-#include "Daters.h"
 #include "Schedulers.h"
-#include "Calendar.h"
 
 // alarm header
 #include "Alarm.h"
+
+// directory header
+#include "DirectoryManager.h"
 
 
 // define for special word
@@ -41,6 +41,7 @@ class ChatBot {
         static void cal_start();
         static int mine_start();
         static void alarm_start();
+        static void scheduler_start();
     public:
         static void chat_body();
 };

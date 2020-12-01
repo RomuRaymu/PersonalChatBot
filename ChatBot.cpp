@@ -28,6 +28,7 @@ void ChatBot::alarm_start() {
     Alarm Al;
     Al.Alarm_function();
 }
+
 /*
     activate when scan "지뢰" and start MineSweeper
     */
@@ -36,6 +37,13 @@ int ChatBot::mine_start() {
     ms.StartMineSweeper();
 
     return 0;
+}
+
+/*
+    activate when sacn "스케쥴" or "일정" and start Scheduler
+    */
+void ChatBot::scheduler_start() {
+    ScheduleMain(DirManager::GetUserDirectory());
 }
 
 /*
@@ -71,6 +79,7 @@ void ChatBot::answer_phase(string dir) {
 	*  1 : move to Calculate
     *  2 : move to MineSweeper
     *  3 : move to Alarm
+    *  4 : move to Schedulers
 	*/
 int ChatBot::chat_check(string question) {
     ifstream readFile;
@@ -88,6 +97,12 @@ int ChatBot::chat_check(string question) {
     } else if(question.find(ALARM) != string::npos) {
         alarm_start();
         return 3;
+    } else if(question.find(SCHEDULERS_1) != string::npos) {
+        scheduler_start();
+        return 4;
+    } else if(question.find(SCHEDULERS_2) != string::npos) {
+        scheduler_start();
+        return 4;
     }
 
     if(readFile.is_open()) {

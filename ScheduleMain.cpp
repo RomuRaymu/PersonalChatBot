@@ -3,6 +3,7 @@
 #include "Schedulers.h"
 #include "Calendar.h"
 
+
 //메뉴
 enum MENU
 {
@@ -15,6 +16,7 @@ enum MENU
 	CHANGE_SCHEDULE = '3' ,
 	QUIT = 'q'
 };
+
 
 
 char GetSelectedMenu(void); //메뉴부분 출력
