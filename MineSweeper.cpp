@@ -18,7 +18,6 @@ void MineSweeper::StartMineSweeper() {
     SetTerminalSize_Menu();
 
     state = State::Menu;
-    GetKey();
 
     while (true) {
         clear();
