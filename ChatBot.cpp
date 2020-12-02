@@ -35,7 +35,7 @@ void ChatBot::schedule_start() {
 	current = GetToday ();
 	system ("clear");
 
-	while ( 1 ){
+	while ( 1 ) {
 		char ch;
 
 		DrawCalendar ( pHead , current );
@@ -43,8 +43,8 @@ void ChatBot::schedule_start() {
 
 		ch = GetSelectedMenu ();
 
-		if ( ch == QUIT_ ){
-			break;
+		if ( ch == QUIT_ ) {
+            break;
 		}
         
 		switch ( ch ) { //메뉴에 따라 해당 달로이동
@@ -72,7 +72,7 @@ void ChatBot::schedule_start() {
 		}
 		system ("clear");
 	}
-	SaveScheduleToFile ( pHead , scFileName );
+	SaveScheduleToFile ( pHead , SCHEDULERFILENAME );
 	KillAllScheduleNode ( pHead );
 }
 
