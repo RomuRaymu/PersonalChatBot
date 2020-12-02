@@ -25,7 +25,6 @@ void ChatBot::cal_start() {
     activate when sacn "스케쥴" or "일정" and start Scheduler
     */
 void ChatBot::schedule_start() {
-    
 	char * scFileName;
 	SCHEDULE *pHead;
 	DATE current;
@@ -36,8 +35,7 @@ void ChatBot::schedule_start() {
 	current = GetToday ();
 	system ("clear");
 
-	while ( 1 )
-	{
+	while ( 1 ){
 		char ch;
 
 		DrawCalendar ( pHead , current );
@@ -45,46 +43,35 @@ void ChatBot::schedule_start() {
 
 		ch = GetSelectedMenu ();
 
-		if ( ch == QUIT_ )
-		{
+		if ( ch == QUIT_ ){
 			break;
 		}
-
-		switch ( ch ) //메뉴에 따라 해당 달로이동
-		{
+        
+		switch ( ch ) { //메뉴에 따라 해당 달로이동
 			case PREV_MONTH:
 				ModifyMonth ( &current , -1 );
 				break;
-
 			case NEXT_MONTH:
 				ModifyMonth ( &current , 1 );
-				break;
-
+		    	break;
 			case PREV_DAY:
 				ModifyDay ( &current , -1 );
 				break;
-
 			case NEXT_DAY:
 				ModifyDay ( &current , 1 );
 				break;
-
 			case ADD_SCHEDULE:
 				AddSchedule ( pHead );
 				break;
-
 			case DELETE_SCHEDULE:
 				DeleteSchedule ( pHead );
 				break;
-
 			case CHANGE_SCHEDULE:
 				Changeschedule ( pHead );
 				break;
 		}
-
 		system ("clear");
 	}
-
-
 	SaveScheduleToFile ( pHead , scFileName );
 	KillAllScheduleNode ( pHead );
 }
