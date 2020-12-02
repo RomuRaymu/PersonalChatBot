@@ -42,7 +42,7 @@ void ChatBot::schedule_start() {
 
 		ch = GetSelectedMenu ();
 
-		if ( ch == QUIT_ )
+		if ( ch == RETURN_CHAT )
 		{
 			break;
 		}
@@ -82,7 +82,7 @@ void ChatBot::schedule_start() {
 	}
 
 
-	SaveScheduleToFile ( pHead , scFileName );
+	SaveScheduleToFile ( pHead , SCHEDULERFILENAME );
 	KillAllScheduleNode ( pHead );
 }
 /*
