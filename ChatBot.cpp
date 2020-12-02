@@ -77,6 +77,14 @@ void ChatBot::schedule_start() {
 }
 
 /*
+    activate when scan "알람" and start alarm function
+    */
+void ChatBot::alarm_start() {
+    Alarm Al;
+    Al.Alarm_function();
+}
+
+/*
     activate when scan "지뢰" and start MineSweeper
     */
 int ChatBot::mine_start() {
