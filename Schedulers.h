@@ -40,17 +40,4 @@ void DeleteSchedule ( SCHEDULE *pHead ); //스케줄 삭제
 void AddSchedule ( SCHEDULE *pHead ); // 스케줄 추가
 void Changeschedule ( SCHEDULE *pHead ); //스케줄 수정
 
-//메뉴
-enum MENU
-{
-	PREV_MONTH = 'a' ,
-	NEXT_MONTH = 'd' ,
-	PREV_DAY = 'w' ,
-	NEXT_DAY = 's' ,
-	ADD_SCHEDULE = '1' ,
-	DELETE_SCHEDULE = '2' ,
-	CHANGE_SCHEDULE = '3' ,
-	QUIT = 'q'
-};
-
 #endif

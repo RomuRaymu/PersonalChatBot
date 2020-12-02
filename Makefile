@@ -1,5 +1,5 @@
-main.out: main.o ChatBot.o Calculator.o Alarm.o Daters.o MineMap.o MineSweeper.o Schedulers.o Calendar.o DirectoryManager.o ScheduleMain.o Calendar.o Daters.o
-	g++ main.o ChatBot.o Calculator.o Alarm.o Daters.o MineMap.o MineSweeper.o Schedulers.o Calendar.o DirectoryManager.o ScheduleMain.o -o Calendat.o Daters.o main.out
+main.out: main.o ChatBot.o Calculator.o Alarm.o Daters.o MineMap.o MineSweeper.o Schedulers.o Calendar.o DirectoryManager.o
+	g++ main.o ChatBot.o Calculator.o Alarm.o Daters.o MineMap.o MineSweeper.o Schedulers.o Calendar.o DirectoryManager.o -o main.out
 
 ChatBot.o : ChatBot.cpp
 	g++ ChatBot.cpp -c -o ChatBot.o
@@ -27,6 +27,3 @@ Calendar.o : Calendar.cpp
 
 DriectoryManager.o : DirectoryManager.cpp
 	g++ DirectoryManager.cpp -c -o DirectoryManager.o
-
-ScheduleMain.o : ScheduleMain.cpp
-	g++ ScheduleMain.cpp -c -o ScheduleMain.o
