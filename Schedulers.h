@@ -40,8 +40,6 @@ void DeleteSchedule ( SCHEDULE *pHead ); //스케줄 삭제
 void AddSchedule ( SCHEDULE *pHead ); // 스케줄 추가
 void Changeschedule ( SCHEDULE *pHead ); //스케줄 수정
 
-char GetSelectedMenu(void); //메뉴부분 출력
-int ScheduleMain(string name); //name에 GetUserDirectory()를 보내주세요
 //메뉴
 enum MENU
 {
