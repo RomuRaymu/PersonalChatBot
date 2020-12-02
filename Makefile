@@ -25,5 +25,5 @@ Schedulers.o : Schedulers.cpp
 Calendar.o : Calendar.cpp
 	g++ Calendar.cpp -c -o Calendar.o
 
-DriectoryManager.cpp : DirectoryManager.cpp
+DriectoryManager.o : DirectoryManager.cpp
 	g++ DirectoryManager.cpp -c -o DirectoryManager.o

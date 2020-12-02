@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "Daters.h"
+#include "Calendar.h"
 
 
 enum MENU
@@ -38,5 +39,5 @@ void ShowAllScheduleByDay ( SCHEDULE *pHead , DATE date ); //date 일로 가서 
 void DeleteSchedule ( SCHEDULE *pHead ); //스케줄 삭제
 void AddSchedule ( SCHEDULE *pHead ); // 스케줄 추가
 void Changeschedule ( SCHEDULE *pHead ); //스케줄 수정
-#endif
 
+#endif

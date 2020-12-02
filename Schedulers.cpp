@@ -333,4 +333,3 @@ void Changeschedule ( SCHEDULE *pHead )
 	system ("clear");
 
 }
-

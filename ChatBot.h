@@ -15,13 +15,13 @@
 #include "MineSweeper.h"
 
 // scheduler header
-#include "common.h"
-#include "Daters.h"
 #include "Schedulers.h"
-#include "Calendar.h"
 
 // alarm header
 #include "Alarm.h"
+
+// directory header
+#include "DirectoryManager.h"
 
 
 // define for special word

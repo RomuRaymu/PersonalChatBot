@@ -21,8 +21,10 @@ void ChatBot::cal_start() {
 	}
 }
 
+/*
+    activate when sacn "스케쥴" or "일정" and start Scheduler
+    */
 void ChatBot::schedule_start() {
-    
 	char * scFileName;
 	SCHEDULE *pHead;
 	DATE current;
@@ -33,8 +35,7 @@ void ChatBot::schedule_start() {
 	current = GetToday ();
 	system ("clear");
 
-	while ( 1 )
-	{
+	while ( 1 ) {
 		char ch;
 
 		DrawCalendar ( pHead , current );
@@ -42,49 +43,39 @@ void ChatBot::schedule_start() {
 
 		ch = GetSelectedMenu ();
 
-		if ( ch == RETURN_CHAT )
-		{
-			break;
+		if ( ch == RETURN_CHAT) {
+            break;
 		}
-
-		switch ( ch ) //메뉴에 따라 해당 달로이동
-		{
+        
+		switch ( ch ) { //메뉴에 따라 해당 달로이동
 			case PREV_MONTH:
 				ModifyMonth ( &current , -1 );
 				break;
-
 			case NEXT_MONTH:
 				ModifyMonth ( &current , 1 );
-				break;
-
+		    	break;
 			case PREV_DAY:
 				ModifyDay ( &current , -1 );
 				break;
-
 			case NEXT_DAY:
 				ModifyDay ( &current , 1 );
 				break;
-
 			case ADD_SCHEDULE:
 				AddSchedule ( pHead );
 				break;
-
 			case DELETE_SCHEDULE:
 				DeleteSchedule ( pHead );
 				break;
-
 			case CHANGE_SCHEDULE:
 				Changeschedule ( pHead );
 				break;
 		}
-
 		system ("clear");
 	}
-
-
 	SaveScheduleToFile ( pHead , SCHEDULERFILENAME );
 	KillAllScheduleNode ( pHead );
 }
+
 /*
     activate when scan "알람" and start alarm function
     */
@@ -92,6 +83,7 @@ void ChatBot::alarm_start() {
     Alarm Al;
     Al.Alarm_function();
 }
+
 /*
     activate when scan "지뢰" and start MineSweeper
     */
@@ -153,7 +145,7 @@ int ChatBot::chat_check(string question) {
     } else if(question.find(ALARM) != string::npos) {
         alarm_start();
         return 3;
-    } else if(question.find(SCHEDULERS_2) != string::npos||question.find(SCHEDULERS_1) != string::npos) {
+    } else if(question.find(SCHEDULERS_1) != string::npos || question.find(SCHEDULERS_2) != string::npos) {
         schedule_start();
         return 4;
     }
