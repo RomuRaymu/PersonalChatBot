@@ -15,7 +15,7 @@ enum MENU
 	ADD_SCHEDULE = '1' ,
 	DELETE_SCHEDULE = '2' ,
 	CHANGE_SCHEDULE = '3' ,
-	QUIT_ = 'q'
+	RETURN_CHAT = 'q'
 };
 
 char GetSelectedMenu(void); //메뉴부분 출력
