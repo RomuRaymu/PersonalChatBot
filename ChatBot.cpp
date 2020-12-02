@@ -22,11 +22,71 @@ void ChatBot::cal_start() {
 }
 
 /*
-    activate when scan "알람" and start alarm function
+    activate when sacn "스케쥴" or "일정" and start Scheduler
     */
-void ChatBot::alarm_start() {
-    Alarm Al;
-    Al.Alarm_function();
+void ChatBot::schedule_start() {
+    
+	char * scFileName;
+	SCHEDULE *pHead;
+	DATE current;
+	pHead = InitScheduleHead ();
+	
+	LoadScheduleFromFile ( pHead , SCHEDULERFILENAME );
+
+	current = GetToday ();
+	system ("clear");
+
+	while ( 1 )
+	{
+		char ch;
+
+		DrawCalendar ( pHead , current );
+		ShowAllScheduleByDay ( pHead , current );
+
+		ch = GetSelectedMenu ();
+
+		if ( ch == QUIT_ )
+		{
+			break;
+		}
+
+		switch ( ch ) //메뉴에 따라 해당 달로이동
+		{
+			case PREV_MONTH:
+				ModifyMonth ( &current , -1 );
+				break;
+
+			case NEXT_MONTH:
+				ModifyMonth ( &current , 1 );
+				break;
+
+			case PREV_DAY:
+				ModifyDay ( &current , -1 );
+				break;
+
+			case NEXT_DAY:
+				ModifyDay ( &current , 1 );
+				break;
+
+			case ADD_SCHEDULE:
+				AddSchedule ( pHead );
+				break;
+
+			case DELETE_SCHEDULE:
+				DeleteSchedule ( pHead );
+				break;
+
+			case CHANGE_SCHEDULE:
+				Changeschedule ( pHead );
+				break;
+		}
+
+		system ("clear");
+	}
+
+
+	SaveScheduleToFile ( pHead , scFileName );
+	KillAllScheduleNode ( pHead );
 }
 
 /*
@@ -37,13 +97,6 @@ int ChatBot::mine_start() {
     ms.StartMineSweeper();
 
     return 0;
-}
-
-/*
-    activate when sacn "스케쥴" or "일정" and start Scheduler
-    */
-void ChatBot::scheduler_start() {
-    ScheduleMain(DirManager::GetUserDirectory());
 }
 
 /*
@@ -79,8 +132,8 @@ void ChatBot::answer_phase(string dir) {
 	*  1 : move to Calculate
     *  2 : move to MineSweeper
     *  3 : move to Alarm
-    *  4 : move to Schedulers
-	*/
+	*  4 : move to Schedule
+    */
 int ChatBot::chat_check(string question) {
     ifstream readFile;
     readFile.open(WORD_GROUP);
@@ -97,11 +150,8 @@ int ChatBot::chat_check(string question) {
     } else if(question.find(ALARM) != string::npos) {
         alarm_start();
         return 3;
-    } else if(question.find(SCHEDULERS_1) != string::npos) {
-        scheduler_start();
-        return 4;
-    } else if(question.find(SCHEDULERS_2) != string::npos) {
-        scheduler_start();
+    } else if(question.find(SCHEDULERS_1) != string::npos || question.find(SCHEDULERS_2) != string::npos) {
+        schedule_start();
         return 4;
     }
 
