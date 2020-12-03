@@ -1,5 +1,5 @@
 #include "Alarm.h"
-#include "DirectoryManager.h"
+
 
 using namespace std;
 
@@ -62,13 +62,13 @@ int Alarm::Time_inputstring(){
 
 int Alarm::Alarm_function()
 {
-    
+
     
     while (1)
     {
         Nowtime();
        
-        std::cout<<"설정 시간을 입력해주세요 [시 분 초 모두 입력해주세요. (ex.4초 = 0시간 0분 4초 타이머 설정해줘)] ";
+        std::cout<<"설정 시간을 입력해주세요 ['시간' '분' '초' 자릿수를 모두 입력해주세요. (ex.4초 = 0시간 0분 4초 타이머 설정해줘)] ";
         std::cout<<">>";
         getline(cin,insert);
 
@@ -78,7 +78,16 @@ int Alarm::Alarm_function()
 
         std::cout << hr <<"시간"<< min<<"분"<<sec<< "초 타이머를 설정했어요!"<<'\n';
         Nowtime();
-        std::this_thread::sleep_for (std::chrono::seconds(total));// 스레드 활용
+
+
+        std::this_thread::yield();
+        
+        std::this_thread::sleep_for(std::chrono::seconds(total));
+        
+
+                
+       
+    
         std::cout << hr<<"시간"<< min<<"분"<<sec<< "초 타이머가 종료되었습니다."<<'\n';
         Nowtime();
         char input;
