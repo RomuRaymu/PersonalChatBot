@@ -18,11 +18,12 @@ enum MENU
 	RETURN_CHAT = 'q'
 };
 
-char GetSelectedMenu(void); //메뉴부분 출력
+void StartSchedule();
+char GetSelectedMenu(void);                   //메뉴부분 출력
 void KillAllScheduleNode ( SCHEDULE *pHead ); //모든 스케줄 제거
 void AddScheduleNode ( SCHEDULE *pHead , SCHEDULE schedule ); //시간까지 찾아서 그것보다 더 큰거에 입력
 void PrintAllSchedule ( SCHEDULE *pHead ); //모든 스케줄 출력
-void PrintScheduleByDate ( SCHEDULE *pHead , DATE date ); //받은 스케줄 
+void PrintScheduleByDate ( SCHEDULE *pHead , DATE date ); //받은 스케줄
 void DeleteScheduleByDateAndTime ( SCHEDULE *pHead , DATE date );  //해당 스케줄 삭제
 void ChangeScheduleByDateAndTime ( SCHEDULE *pHead , SCHEDULE schedule); //해당 시간 스케줄 바꿈
 
