@@ -1,5 +1,5 @@
 main.out: main.o ChatBot.o Calculator.o Alarm.o Daters.o MineMap.o MineSweeper.o Schedulers.o Calendar.o DirectoryManager.o
-	g++ main.o ChatBot.o Calculator.o Alarm.o Daters.o MineMap.o MineSweeper.o Schedulers.o Calendar.o DirectoryManager.o -o main.out
+	g++ main.o ChatBot.o Calculator.o Alarm.o Daters.o MineMap.o MineSweeper.o Schedulers.o Calendar.o DirectoryManager.o -o main.out -pthread
 
 ChatBot.o : ChatBot.cpp
 	g++ ChatBot.cpp -c -o ChatBot.o

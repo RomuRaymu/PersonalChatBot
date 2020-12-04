@@ -35,16 +35,15 @@ void ChatBot::cal_start() {
     void ChatBot::alarm_start() {
         Alarm Al;
         Al.Alarm_function();
+        getchar();
     }
 
     /*
         activate when scan "지뢰" and start MineSweeper
         */
-    int ChatBot::mine_start() {
+    void ChatBot::mine_start() {
         class MineSweeper ms;
         ms.StartMineSweeper();
-
-        return 0;
     }
 
     /*

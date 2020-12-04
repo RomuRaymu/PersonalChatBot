@@ -42,7 +42,7 @@ class ChatBot {
         static void answer_phase(std::string dir);
         static int chat_check(std::string question);
         static void cal_start();
-        static int mine_start();
+        static void mine_start();
         static void alarm_start();
         static void schedule_start();
     public:
