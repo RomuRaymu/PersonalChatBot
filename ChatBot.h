@@ -28,7 +28,8 @@
 #define ALARM "알람"
 #define QUIT "종료"
 #define CALCULATOR "계산"
-#define MINE "지뢰"
+#define MINE_1 "지뢰"
+#define MINE_2 "게임"
 #define SCHEDULERS_1 "일정"
 #define SCHEDULERS_2 "스케줄"
 

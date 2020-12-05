@@ -70,17 +70,17 @@ void ChatBot::answer_phase(string dir) {
             cout << answer << endl;
         }
         readFile.close();
-    }
+     }
 }
 
 /*
- * -1 : Cannot scan correct word
- *  0 : Success to Scan for chat
- *  1 : move to Calculate
- *  2 : move to MineSweeper
- *  3 : move to Alarm
- *  4 : move to Schedule
- */
+     * -1 : Cannot scan correct word
+     *  0 : Success to Scan for chat
+     *  1 : move to Calculate
+     *  2 : move to MineSweeper
+     *  3 : move to Alarm
+     *  4 : move to Schedule
+    */
 int ChatBot::chat_check(string question) {
     ifstream readFile;
     readFile.open(WORD_GROUP);
@@ -91,7 +91,8 @@ int ChatBot::chat_check(string question) {
     } else if (question.find(CALCULATOR) != string::npos) {
         cal_start();
         return 1;
-    } else if (question.find(MINE) != string::npos) {
+    } else if (question.find(MINE_1) != string::npos ||
+               question.find(MINE_2) != string::npos) {
         mine_start();
         return 2;
     } else if (question.find(ALARM) != string::npos) {
